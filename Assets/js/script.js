@@ -29,12 +29,12 @@ const tripAdvisorOptions = {
     };
 
 // This function will provide restaurant reviews nearby this location previously pinned!
-const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=304554'
+const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=${locationId}';
 fetch(url, tripAdvisorOptions)
     .then(response => response.json())
     .then(response => {
     // we can do something with the response!
-    }
+    })
     .catch(err => console.error(err));
 
 }
@@ -47,6 +47,17 @@ fetch(url, tripAdvisorOptions)
 
 
 
+
+
+
+
+
+
+
+
+
+
+// Previous code we copied from the Rapid API - SAVED IT DOWN HERE IN CASE WE NEED IT 
 
         // const geoApiOptions = {
         //     method: 'GET',
@@ -76,31 +87,7 @@ fetch(url, tripAdvisorOptions)
         //         .catch(err => console.error(err));
         
         
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 // // All parameters will go here
 
