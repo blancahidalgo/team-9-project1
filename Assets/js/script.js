@@ -1,3 +1,8 @@
+var cityNameInput = document.querySelector('#cityInput');
+var searchCityButton = document.querySelector('#submitBtn');
+var cityName = document.querySelector('#city-name');
+
+
 // This function gets the users location using IP address 
 const geoApiOptions = {
 	method: 'GET',
@@ -7,7 +12,7 @@ const geoApiOptions = {
 	}
 };
 
-// Line 14 onwards --> call function to search for restaurants near your pinned IP location 
+// This function fetches geolocation data for an IP address - extracts the locationId from the response, and then passes that ID to a searchRestaurants() function running below
 fetch('https://ip-geo-location.p.rapidapi.com/ip/check?format=json', geoApiOptions)
 	.then(response => response.json())
 	.then(response => {
@@ -17,8 +22,7 @@ fetch('https://ip-geo-location.p.rapidapi.com/ip/check?format=json', geoApiOptio
 	.catch(err => console.error(err));
 
 
-    
-// Search for restaurants in the pinned location starts here 
+// This code sets up the required options to the use the Trip Advisor API and search for restos in a specific location
 function searchRestaurants(locationId)  { 
 const tripAdvisorOptions = {
         method: 'GET',
@@ -28,7 +32,7 @@ const tripAdvisorOptions = {
         }
     };
 
-// This function will provide restaurant reviews nearby this location previously pinned!
+// This function makes an API request to TripAdvisor API to search for restos in a specific location 
 const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=${locationId}';
 fetch(url, tripAdvisorOptions)
     .then(response => response.json())
@@ -39,6 +43,24 @@ fetch(url, tripAdvisorOptions)
 
 }
 
+// THIS ARE THE EVENT LISTENERS! TO RETRIEVE DATA WHEN SEARCHING FOR THE CITY/LOCATION
+
+searchCityButton.addEventListener('click', () => {
+    var locationId = cityNameInput.value.trim();
+    cityNameInput.value = '';
+    if (city) {
+      searchRestaurants(locationId);
+    }
+  });
+  
+  cityNameInput.addEventListener('keyup', event => {
+    if (event.key === 'Enter') {
+      const locationID = cityNameInput.value.trim();
+      if (city) {
+        searchRestaurants(locationId);
+    }
+    }
+  });
 
 
 
