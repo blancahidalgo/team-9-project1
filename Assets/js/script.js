@@ -1,7 +1,8 @@
 var cityNameInput = document.querySelector('#cityInput');
 var searchCityButton = document.querySelector('#submitBtn');
 var cityName = document.querySelector('#city-name');
-
+var restoContainer = document.querySelector('#resto-container');
+var restoTitle = document.querySelector('#city1');
 
 // This function gets the users location using IP address 
 const geoApiOptions = {
@@ -16,8 +17,9 @@ const geoApiOptions = {
 fetch('https://ip-geo-location.p.rapidapi.com/ip/check?format=json', geoApiOptions)
 	.then(response => response.json())
 	.then(response => {
-      const locationId = response.geoData.city.id;
-      searchRestaurants(locationId); 
+      console.log(response)
+      const city = response.city.name;
+      searchRestaurants(city); 
     })
 	.catch(err => console.error(err));
 
@@ -27,17 +29,19 @@ function searchRestaurants(locationId)  {
 const tripAdvisorOptions = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '1813231e63msh4ee73e1d7e35ebfp1ce212jsn92bc31217085',
+            'X-RapidAPI-Key': 'bce888dda3msh2b31013f832bae2p17c202jsnf4d329f60a3b',
             'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
         }
     };
 
 // This function makes an API request to TripAdvisor API to search for restos in a specific location 
-const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=${locationId}';
+const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchLocation?query=' + locationId
 fetch(url, tripAdvisorOptions)
     .then(response => response.json())
     .then(response => {
     // we can do something with the response!
+    console.log(response)
+    renderCity(locationId)
     })
     .catch(err => console.error(err));
 
@@ -53,7 +57,7 @@ searchCityButton.addEventListener('click', () => {
     }
   });
   
-  cityNameInput.addEventListener('keyup', event => {
+cityNameInput.addEventListener('keyup', event => {
     if (event.key === 'Enter') {
       const locationID = cityNameInput.value.trim();
       if (city) {
@@ -62,10 +66,25 @@ searchCityButton.addEventListener('click', () => {
     }
   });
 
+function renderCity(citySearch) {
+    cityName.value = citySearch;
+    console.log(citySearch);
+}
 
+// This function will render restaurant results
+function renderResults(results){
+restoContainer.textContent = "";
+restoTitle.textContent = "Resto Results!";
+var restoName = document.createElement("div");
+restoName.classList = "card text-white bg-secondary mb-3 text-dark m-2";
+}
 
-
-
+// This function will run a for loop to get 5 x resto results - and then stop 
+// var restoResultsFive = document.querySelector("#resto");
+//     for (var i=0; i < searchRestaurants.length; i++)
+//     if i = 4 {
+//       console.log(forecastRes[i]);
+//     }
 
 
 
