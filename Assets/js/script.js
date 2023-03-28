@@ -1,12 +1,18 @@
 var cityNameInput = document.querySelector('#selectCity');//this was cityName
-var searchCityButton = document.querySelector('#submitBtn');
-var cityName = document.querySelector('#city-name');
+var submitCityButton = document.querySelector('#submitBtn');
+//var cityName = document.querySelector('#city-name');
 var restoContainer = document.querySelector('#resto-container');
 var restoTitle = document.querySelector('#city1');
+var citySyd = document.querySelector('#selectionSydney');
+var cityMelb = document.querySelector('#selectionMelbourne');
+var cityBrisy = document.querySelector('#selectionBrisbane');
+var cityChoice;
 
 var locations = {
-  "Sydney": 255060,
-  "SydneyOlympicPark": 3323314
+  "citySyd": 255060,
+  "cityMelb" : 255100,
+  "cityBrisy" : 255068,
+
 }
 
 // get user input from dropdown
@@ -24,7 +30,7 @@ console.log(locations["Sydney"]);
 const geoApiOptions = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '',
+		'X-RapidAPI-Key': '1813231e63msh4ee73e1d7e35ebfp1ce212jsn92bc31217085',
 		'X-RapidAPI-Host': 'ip-geo-location.p.rapidapi.com'
 	}
 };
@@ -35,30 +41,32 @@ fetch('https://ip-geo-location.p.rapidapi.com/ip/check?format=json', geoApiOptio
 	.then(response => {
       console.log(response)
       const city = response.city.name;
-      searchRestaurants(city);
+      //searchRestaurants(city);
     })
 	.catch(err => console.error(err));
 
 
 // This code sets up the required options to the use the Trip Advisor API and search for restos in a specific location
-function searchRestaurants(locationId)  { 
+function searchRestaurants(location)  { 
   const tripAdvisorOptions = {
           method: 'GET',
           headers: {
-              'X-RapidAPI-Key': 'e796e5b386msh092aba973e5001ap1f4c3djsn150ad429e4a2',
+              'X-RapidAPI-Key': '1813231e63msh4ee73e1d7e35ebfp1ce212jsn92bc31217085',
               'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
           }
       };
 
   // This function makes an API request to TripAdvisor API to search for restos in a specific location 
-  const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchLocation?query=' + locationId
+  const url = 'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=' + location
   fetch(url, tripAdvisorOptions)
       .then(response => response.json())
-      .then(response => {
+      .then(data => {
       // we can do something with the response!
-      console.log(response);
-      renderCity(locationId);
-      renderResults(response.data);
+        if (data) {
+          console.log(data.data.data);
+          //renderCity(locations);
+           renderResults(data.data.data);
+        }
       })
       .catch(err => console.error(err));
 
@@ -66,42 +74,48 @@ function searchRestaurants(locationId)  {
 
 // THIS ARE THE EVENT LISTENERS! TO RETRIEVE DATA WHEN SEARCHING FOR THE CITY/LOCATION
 
-searchCityButton.addEventListener('click', () => {
-    var locationId = cityNameInput.value.trim();
-    cityNameInput.value = '';
-    if (city) {
-      searchRestaurants(locationId);
-    }
+submitCityButton.addEventListener('click', () => {
+  console.log("test")
+  searchRestaurants(locations[cityChoice])
   });
   
-cityNameInput.addEventListener('keyup', event => {
-    if (event.key === 'Enter') {
-      const locationID = cityNameInput.value.trim();
-      if (city) {
-        searchRestaurants(locationId);
-    }
-    }
-  });
+  cityNameInput.addEventListener('change', event => {
+    cityChoice = event.target.value;
 
-function renderCity(citySearch) {
-    cityName.value = citySearch;
-    console.log(citySearch);
-}
+   
+    // if (event.key === 'click') {
+    //   const locations = cityNameInput.value();
+    //   if (citySyd === true) {
+    //     return results;
+    //   } else if (cityMelb === true) {
+    //     return results;
+    //   } else if (cityBrisy === true) {
+    //     return results;
+    //   } else {
+    //     return "results not found";
+    //   }
+    // }
+  });
+  
+
+// function renderCity(citySearch) {
+//     cityName.value = citySearch;
+//     console.log(citySearch);
+//}
 
 // This function will render restaurant results
 function renderResults(results){
   if (results.length > 5) {
     results = results.splice(0, 5);
+    console.log(results);
   }
-  console.log(results);
   for (let i=0; i<results.length; i++) {
-    restoContainer.textContent = "";
     var restoTitle = document.createElement("h5");
     restoTitle.textContent = "Resto Results!";
     var restoName = document.createElement("div");
     restoName.appendChild(restoTitle);
     restoName.classList = "card text-white bg-secondary mb-3 text-dark m-2";
-    restoName.textContent = results[i].localizedName;
+    restoName.textContent = results[i].name;
     restoContainer.appendChild(restoName);
   }
 }
