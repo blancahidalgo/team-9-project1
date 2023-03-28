@@ -1,4 +1,4 @@
-var cityNameInput = document.querySelector('#cityInput');
+var cityNameInput = document.querySelector('#selectCity');//this was cityName
 var searchCityButton = document.querySelector('#submitBtn');
 var cityName = document.querySelector('#city-name');
 var restoContainer = document.querySelector('#resto-container');

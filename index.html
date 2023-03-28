@@ -29,31 +29,35 @@
   <div class="container">
   <div>
     <h2 id="line"> Find a Restaurant near you </h2>
-  </div>
-  
-  <div class="control" id="searchInput">
+      <!--div class="control" id="searchInput">
     <input class="input is-medium" id="city-name" type="text" placeholder="Search your location here">
-<div class="result"></div>
+<div class="result"></div-->
 
-  <div class="control" id="cityInput">
+  <!--div class="control" id="cityInput">
     <input class="input is-medium" id="city-name" type="text" placeholder="Search your location here">
-  </div>
+  </div-->
+    
+  <div class="control" id="selectCity">
+    <div class="select">
+      <select>
+        <option>Select Your Location</option>
+          <option value="cityOption">Sydney</option>
+          <option value="cityOption">Melbourne</option>
+          <option value="cityOption">Brisbane</option>
+          </div>
+            </div>
+      </select>
   
   <div class="control">
       <button class="button is-primary" id="submitBtn">Submit</button>
   </div>
   
-  <div id="resto-container"></div>
-  <!--div class=" cities ">
-    <div class="cities-title">CITIES IN AUSTRALIA</div>
-    <div class="cities-sub-title">
-      Sydney, Melbourne, Adelaide, Perth, Brisbane, Gold Coast & Darwin
-    </div>
   </div>
-</div-->
+  </div>
 
+<div id="resto-container"></div>
 
-​
+​<div>
 <footer id="contact-us" class="contact-us">
   <div class="footer">
       <h2>Contact Us</h2>
@@ -63,7 +67,7 @@
     <i class="fa-brands fa-youtube"></i>
     </div>    
 </footer>
-
+</div>
 
 ​<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./Assets/js/script.js"></script>
