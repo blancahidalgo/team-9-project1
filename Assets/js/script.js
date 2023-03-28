@@ -104,20 +104,53 @@ submitCityButton.addEventListener('click', () => {
 //}
 
 // This function will render restaurant results
+var stars = 0
 function renderResults(results){
   if (results.length > 5) {
     results = results.splice(0, 5);
     console.log(results);
   }
+ 
   for (let i=0; i<results.length; i++) {
-    var restoTitle = document.createElement("h5");
+
+    var restoTitle = document.createElement("h4");
     restoTitle.textContent = "Resto Results!";
     var restoName = document.createElement("div");
     restoName.appendChild(restoTitle);
     restoName.classList = "card text-white bg-secondary mb-3 text-dark m-2";
     restoName.textContent = results[i].name;
     restoContainer.appendChild(restoName);
+    var restoReview = document.createElement("h5");
+    displayStars(results[i].averageRating)
+    console.log(stars)
+    restoReview.textContent = stars;
+    restoContainer.appendChild(restoReview);
+
+    var reviewSnipets = document.createElement("p");
+    reviewSnipets.textContent = results[i].reviewSnippets.reviewSnippetsList[0];
+    restoContainer.appendChild(reviewSnipets);
+    
+    var currentOpenStatusText = document.createElement("p");
+    currentOpenStatusText.textContent = results[i].currentOpenStatusText;
+    restoContainer.appendChild(currentOpenStatusText);
+
+    var cuisineTags = document.createElement("p");
+    cuisineTags.textContent = results[i].establishmentTypeAndCuisineTags[0];
+    restoContainer.appendChild(cuisineTags);
+
   }
+}
+
+function displayStars(rating){
+  var fullStars = Math.floor(rating);
+  var halfStars = rating % 1 === 0.5 ? 1 : 0
+  var emptyStars = 5 - fullStars - halfStars;
+
+  var starOutput = "🌟".repeat(fullStars) + (halfStars ? "🌓" : "" )
+  console.log(starOutput)
+  stars = starOutput
+  return stars
+
 }
 
 // This function will run a for loop to get 5 x resto results - and then stop 
