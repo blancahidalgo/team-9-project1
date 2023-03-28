@@ -14,16 +14,7 @@ var locations = {
   "cityBrisy" : 255068,
 
 }
-
-// get user input from dropdown
-// map the input to a location using the locations object
-// make a request to https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchAirport
-  // with the location ID present (see docs on RapidAPi)
-// for each resturaunt in the array, show a card on the screen
-
-// Example of finding an element in an array by key
-  // This could be done using the value from the user instead of
-  // "Sydney" being hard coded.
+// Do we need this line below? 
 console.log(locations["Sydney"]);
 
 // This function gets the users location using IP address 
@@ -72,7 +63,7 @@ function searchRestaurants(location)  {
 
 }
 
-// THIS ARE THE EVENT LISTENERS! TO RETRIEVE DATA WHEN SEARCHING FOR THE CITY/LOCATION
+// Two event listeners are placed below. One 'click' event and one 'change' event working with the dropdown options in HTML
 
 submitCityButton.addEventListener('click', () => {
   console.log("test")
@@ -81,30 +72,15 @@ submitCityButton.addEventListener('click', () => {
   
   cityNameInput.addEventListener('change', event => {
     cityChoice = event.target.value;
-
-   
-    // if (event.key === 'click') {
-    //   const locations = cityNameInput.value();
-    //   if (citySyd === true) {
-    //     return results;
-    //   } else if (cityMelb === true) {
-    //     return results;
-    //   } else if (cityBrisy === true) {
-    //     return results;
-    //   } else {
-    //     return "results not found";
-    //   }
-    // }
   });
   
 
-// function renderCity(citySearch) {
-//     cityName.value = citySearch;
-//     console.log(citySearch);
-//}
 
-// This function will render restaurant results
+
+// This function will render restaurant results and then start a for loop rendering more properties (opening hours, reviews and cuisineTags)
+
 var stars = 0
+
 function renderResults(results){
   if (results.length > 5) {
     results = results.splice(0, 5);
@@ -137,10 +113,10 @@ function renderResults(results){
     var cuisineTags = document.createElement("p");
     cuisineTags.textContent = results[i].establishmentTypeAndCuisineTags[0];
     restoContainer.appendChild(cuisineTags);
-
   }
 }
 
+// This fun little function will display fancy stars displaying the average restaurant rating!
 function displayStars(rating){
   var fullStars = Math.floor(rating);
   var halfStars = rating % 1 === 0.5 ? 1 : 0
@@ -150,15 +126,15 @@ function displayStars(rating){
   console.log(starOutput)
   stars = starOutput
   return stars
-
 }
 
-// This function will run a for loop to get 5 x resto results - and then stop 
-// var restoResultsFive = document.querySelector("#resto");
-//     for (var i=0; i < searchRestaurants.length; i++)
-//     if i = 4 {
-//       console.log(forecastRes[i]);
-//     }
+
+
+// 1. get user input from dropdown -- DONE
+// 2. map the input to a location using the locations object -- DONE
+// 3. make a request to https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchAirport -- DONE
+// 4. with the location ID present (see docs on RapidAPi) -- DONE 
+// for each resturaunt in the array, show a card on the screen -- DONE
 
 
 
@@ -170,60 +146,3 @@ function displayStars(rating){
 
 
 
-
-
-// Previous code we copied from the Rapid API - SAVED IT DOWN HERE IN CASE WE NEED IT 
-
-        // const geoApiOptions = {
-        //     method: 'GET',
-        //     headers: {
-        //         'X-RapidAPI-Key': '1813231e63msh4ee73e1d7e35ebfp1ce212jsn92bc31217085',
-        //         'X-RapidAPI-Host': 'ip-geo-location.p.rapidapi.com'
-        //     }
-        // };
-        
-        // fetch('https://ip-geo-location.p.rapidapi.com/ip/check?format=json', geoApiOptions)
-        //     .then(response => response.json())
-        //     .then(response => console.log(response))
-        //     .catch(err => console.error(err));
-            
-        
-        // const tripAdvisorOptions = {
-        //         method: 'GET',
-        //         headers: {
-        //             'X-RapidAPI-Key': '1813231e63msh4ee73e1d7e35ebfp1ce212jsn92bc31217085',
-        //             'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
-        //         }
-        //     };
-            
-        //     fetch('https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=304554', tripAdvisorOptions)
-        //         .then(response => response.json())
-        //         .then(response => console.log(response))
-        //         .catch(err => console.error(err));
-        
-        
-    
-
-// // All parameters will go here
-
-// var location = document.querySelector('latitude, longitude');
-// var Sydney = document.querySelector('.1');
-// var Melbourne = document.querySelector('.2');
-// var Adelaide = document.querySelector('.3');
-// var Perth = document.querySelector('.4');
-// var Brisbane = document.querySelector('.5');
-// var GoldCoast = document.querySelector('.6');
-// var Darwin = document.querySelector('.7');
-
-// var reviews = document.querySelector('rating');
-// var restoSearch = document.querySelector('');
-// var restoSearch = document.querySelector('');
-// var restoSearch = document.querySelector('');
-// var restoSearch = document.querySelector('');
-
-
-// // First function here 
-
-// function restoFinder(location) {
-
-// }
