@@ -1,6 +1,6 @@
 # RestoFinder 
 
-# Table of Contents 
+## Table of Contents 
 
 * Overview
 * Usage
@@ -8,18 +8,19 @@
 * Technologies Used 
 * Collaborators 
 * Mock-Up
+* Link to Deployed Site/GitHub Repo
 * Copyright
 
 
-# Overview 
+## Overview 
 
 The RestoFinder app uses the TripAdvisor API and IP GEO Location API to provide users with a convenient and easy-to-use tool for finding up to five nearby restaurants.  
 
-# Usage
+## Usage
 
 When you run the app, you will choose your city from a drop-down list, then the app will use the TripAdvisor API to find restaurants. The TripAdvisor API is used to retrieve restaurant data, including restaurant names, restaurant types, ratings and reviews, open status. This data is then displayed in a user-friendly format. 
 
-# Essential Criteria
+## Essential Criteria
 
 * We used a CCS framework called Bulma
 * Our page is interactive, it accepts and responds to user input
@@ -30,7 +31,7 @@ When you run the app, you will choose your city from a drop-down list, then the 
 * It has a quality README file with all the relevant information, a screenshot and the link to the deployed application 
 
 
-# Technologies Used
+## Technologies Used
 
 This app was built using the following technologies:
 
@@ -39,7 +40,7 @@ This app was built using the following technologies:
 * GitHub branching workflow collaboration 
 
 
-# Collaborators 
+## Collaborators 
 
 * Saria Elchaar
 * Blanca Hidalgo
@@ -47,11 +48,17 @@ This app was built using the following technologies:
 * Alex Nanut 
 
 
-# Mock-Up
+## Mock-Up
 
 The following image shows the web application's appearance and functionality:
 
+![Alt text](Assets/images/RestoFinder%20(1).gif)
 
-# Copyright 
+## Link to Deployed Site/GitHub Repo
+
+* Deployed Site: https://blancahidalgo.github.io/team-9-project1/
+* GitHub Repo: https://github.com/blancahidalgo/team-9-project1.git 
+
+## Copyright 
 
 N/A 

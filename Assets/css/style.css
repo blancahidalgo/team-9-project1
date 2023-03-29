@@ -5,6 +5,7 @@ body {
     background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
 }
 
+/*Hero/Header section styling*/
 .hero-body {
     background-color: rgba(0, 0, 0, 0.85);
     justify-content: center;
@@ -35,7 +36,7 @@ p {
     letter-spacing: 2.5px;
     
 }
-
+/*Mid section with dropdown and submit button*/
 .container.is-fluid {
     max-width: none !important;
     width: 100%;
@@ -66,7 +67,7 @@ div.select {
     font-size: 20px;
     margin-top: 30px;
 }
-
+/*Footer and social Media Styling*/
 .contact-us {
     margin-top: 40px;
     padding-top: 10px;
@@ -98,7 +99,7 @@ div.footer {
     color: white;
     font-size: 40px;
   }
-
+/*Resto Container Styling*/
 h2 {
     font-size: larger;
     font-weight: bold;
@@ -111,7 +112,7 @@ div.control {
     font-family: 'Helvetica', Arial, sans-serif;
    display: flex;
 }
-
+/*Submit Button*/
 .button.is-primary {
     display: block;
     background-color: rgba(0, 0, 0, 0.85);
@@ -125,7 +126,7 @@ div.control {
 input.input.is-medium {
     width: 50%;
 }
-
+/*Resto Container styling*/
 #resto-container {
     background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
     margin-top: 100px;
