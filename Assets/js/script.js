@@ -88,32 +88,80 @@ function renderResults(results){
   }
  
   for (let i=0; i<results.length; i++) {
+    var restoCard = document.createElement("div");
+    restoCard.classList= "card";
+    
+    var restoCardContent = document.createElement("div");
+    restoCardContent.classList = "card-content";
 
-    var restoTitle = document.createElement("h4");
-    restoTitle.textContent = "Resto Results!";
-    var restoName = document.createElement("div");
-    restoName.appendChild(restoTitle);
-    restoName.classList = "card text-white bg-secondary mb-3 text-dark m-2";
+    //var restoTitle = document.createElement("p");
+    //restoTitle.classList = "title is-4";
+    //restoTitle.textContent = "Resto Results!";
+   // restoCardContent.appendChild(restoTitle)
+   
+
+    var restoName = document.createElement("p");
+    restoName.classList = "title is-4";
     restoName.textContent = results[i].name;
-    restoContainer.appendChild(restoName);
-    var restoReview = document.createElement("h5");
+    restoCardContent.appendChild(restoName);
+    
+    
+    var restoReview = document.createElement("p");
+    restoReview.classList = "subtitle is-6";
     displayStars(results[i].averageRating)
     console.log(stars)
     restoReview.textContent = stars;
-    restoContainer.appendChild(restoReview);
-
-    var reviewSnipets = document.createElement("p");
-    reviewSnipets.textContent = results[i].reviewSnippets.reviewSnippetsList[0];
-    restoContainer.appendChild(reviewSnipets);
-    
-    var currentOpenStatusText = document.createElement("p");
-    currentOpenStatusText.textContent = results[i].currentOpenStatusText;
-    restoContainer.appendChild(currentOpenStatusText);
+    //restoReview.classList = "card-content text-white bg-secondary mb-3 text-dark m-2";
+    restoCardContent.appendChild(restoReview);
 
     var cuisineTags = document.createElement("p");
-    cuisineTags.textContent = results[i].establishmentTypeAndCuisineTags[0];
-    restoContainer.appendChild(cuisineTags);
+    cuisineTags.classList = "subtitle is-6";
+    cuisineTags.textContent = "Type of Cuisine: " + results[i].establishmentTypeAndCuisineTags[1];
+    restoCardContent.appendChild(cuisineTags);
+
+    var reviewSnipets = document.createElement("p");
+    reviewSnipets.classList = "subtitle is-6";
+    var reviewUrl = "https://www.tripadvisor.co.nz/" + results[i].reviewSnippets.reviewSnippetsList[0].reviewUrl;
+    var reviewLink = document.createElement("a");
+    reviewLink.setAttribute("href", reviewUrl);
+    reviewLink.textContent = "Click here to view Reviews ";
+    reviewSnipets.appendChild(reviewLink);
+   // reviewSnipets.textContent = results[i].reviewSnippets.reviewSnippetsList[0].reviewUrl;
+    restoCardContent.appendChild(reviewSnipets);
+
+    var restoMenu = document.createElement("p");
+    restoMenu.classList = "subtitle is-6";
+    var menuUrl = results[i].menuUrl;
+    var menuLink = document.createElement("a");
+    menuLink.setAttribute("href", menuUrl);
+    menuLink.textContent = "Click to view Resto Menu";
+    restoMenu.appendChild(menuLink);
+    restoCardContent.appendChild(restoMenu);
+    
+    var currentOpenStatusText = document.createElement("p");
+    currentOpenStatusText.classList = "subtitle is-6";
+    
+    if (results[i].status === 'Open Now') {
+      currentOpenStatusText.classList.add('has-text-success');
+    } else {
+      currentOpenStatusText.classList.add('has-text-danger');
+    }
+    currentOpenStatusText.textContent = "🕛 " + results[i].currentOpenStatusText;
+    restoCardContent.appendChild(currentOpenStatusText);
+
+    var restoImage = document.createElement("img");
+    restoImage.classList = "image";
+    restoImage.setAttribute("src", results[i].heroImgUrl);
+    restoImage.style.position = "relative";
+    restoImage.style.bottom = "210px";
+  
+    restoCardContent.appendChild(restoImage);
+
+    restoCard.appendChild(restoCardContent);
+    restoContainer.appendChild(restoCard)
   }
+
+
 }
 
 // This fun little function will display fancy stars displaying the average restaurant rating!
