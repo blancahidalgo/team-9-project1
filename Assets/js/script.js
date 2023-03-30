@@ -1,3 +1,4 @@
+//Calling global variables
 var cityNameInput = document.querySelector('#selectCity');//this was cityName
 var submitCityButton = document.querySelector('#submitBtn');
 //var cityName = document.querySelector('#city-name');
@@ -14,7 +15,7 @@ var locations = {
   "cityBrisy" : 255068,
 
 }
-// Do we need this line below? 
+ 
 console.log(locations["Sydney"]);
 
 // This function gets the users location using IP address 
@@ -86,26 +87,22 @@ function renderResults(results){
     results = results.splice(0, 5);
     console.log(results);
   }
- 
+ //Create a loop to fetch and display 5 cards
   for (let i=0; i<results.length; i++) {
     var restoCard = document.createElement("div");
     restoCard.classList= "card";
     
     var restoCardContent = document.createElement("div");
     restoCardContent.classList = "card-content";
-
-    //var restoTitle = document.createElement("p");
-    //restoTitle.classList = "title is-4";
-    //restoTitle.textContent = "Resto Results!";
-   // restoCardContent.appendChild(restoTitle)
    
+   //Section to call the Restaruant's Name
 
     var restoName = document.createElement("p");
     restoName.classList = "title is-4";
     restoName.textContent = results[i].name;
     restoCardContent.appendChild(restoName);
     
-    
+    //Section to call the Reviews
     var restoReview = document.createElement("p");
     restoReview.classList = "subtitle is-6";
     displayStars(results[i].averageRating)
@@ -114,11 +111,13 @@ function renderResults(results){
     //restoReview.classList = "card-content text-white bg-secondary mb-3 text-dark m-2";
     restoCardContent.appendChild(restoReview);
 
+    //Section to call type of Cuisine the Restaurant serves
     var cuisineTags = document.createElement("p");
     cuisineTags.classList = "subtitle is-6";
     cuisineTags.textContent = "Type of Cuisine: " + results[i].establishmentTypeAndCuisineTags[1];
     restoCardContent.appendChild(cuisineTags);
 
+    //Section to display link which will have all reviews via TripAdviser Page
     var reviewSnipets = document.createElement("p");
     reviewSnipets.classList = "subtitle is-6";
     var reviewUrl = "https://www.tripadvisor.co.nz/" + results[i].reviewSnippets.reviewSnippetsList[0].reviewUrl;
@@ -129,6 +128,7 @@ function renderResults(results){
    // reviewSnipets.textContent = results[i].reviewSnippets.reviewSnippetsList[0].reviewUrl;
     restoCardContent.appendChild(reviewSnipets);
 
+    //Section to display link which will have Restaruant menu via Restaurant's page
     var restoMenu = document.createElement("p");
     restoMenu.classList = "subtitle is-6";
     var menuUrl = results[i].menuUrl;
@@ -138,10 +138,11 @@ function renderResults(results){
     restoMenu.appendChild(menuLink);
     restoCardContent.appendChild(restoMenu);
     
+    //Section to view whether Restaurant is open/closed
     var currentOpenStatusText = document.createElement("p");
     currentOpenStatusText.classList = "subtitle is-6";
     
-    if (results[i].status === 'Open Now') {
+    if (results[i].status === "Open Now") {
       currentOpenStatusText.classList.add('has-text-success');
     } else {
       currentOpenStatusText.classList.add('has-text-danger');
@@ -149,6 +150,7 @@ function renderResults(results){
     currentOpenStatusText.textContent = "🕛 " + results[i].currentOpenStatusText;
     restoCardContent.appendChild(currentOpenStatusText);
 
+    //Section to place/display restaurant image
     var restoImage = document.createElement("img");
     restoImage.classList = "image";
     restoImage.setAttribute("src", results[i].heroImgUrl);
